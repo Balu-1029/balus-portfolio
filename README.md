@@ -29,6 +29,7 @@ MY PORTFOLIO WEBSITE/
 ├── projects.html       # Projects and internship experience
 ├── contact.html        # Contact details
 ├── style.css           # Global styling for the website
+├── README.md           # Project documentation
 └── Images/             # Profile image and icons used in the site
 ```
 
