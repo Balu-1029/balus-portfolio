@@ -14,12 +14,17 @@
     <!-- Header -->
     <header id="header">
         <div class="logo">BALAJI KOTA<span>.</span></div>
-        <ul>
-        <li><a href="./index.html">HOME</a></li>
-        <li><a href="./about.html">ABOUT</a></li>
-        <li><a href="./projects.html">PROJECTS</a></li>
-        <li><a href="./contact.html">CONTACT</a></li>
-        </ul>
+        <div class="header-actions">
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <ul>
+                <li><a href="./index.html">HOME</a></li>
+                <li><a href="./about.html">ABOUT</a></li>
+                <li><a href="./projects.html">PROJECTS</a></li>
+                <li><a href="./contact.html">CONTACT</a></li>
+            </ul>
+        </div>
     </header>
 
     <!--About-->
@@ -120,5 +125,35 @@
         </div>
     </section>
 
+<script>
+  (function () {
+    const storedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+
+  const toggleButton = document.getElementById('theme-toggle');
+  const themeIcon = toggleButton?.querySelector('.theme-icon');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    if (toggleButton) {
+      toggleButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+  }
+
+  const initialTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(initialTheme);
+
+  toggleButton?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(currentTheme);
+  });
+</script>
 </body>
 </html>
